@@ -1,0 +1,40 @@
+Align the full structures first
+align FOLD0, 3dzy
+
+# Define Domain Residue Ranges (Modify if Needed)
+# PPAR DBD
+create ppar_dbd_target, 3dzy and chain D and resi 136-210
+create ppar_dbd_model, FOLD0 and chain B and resi 1-74
+
+# PPAR LBD
+create ppar_lbd_target, 3dzy and chain D and resi 238-503
+create ppar_lbd_model, FOLD0 and chain B and resi 164-429
+
+# RXR DBD
+create rxr_dbd_target, 3dzy and chain A and resi 135-200
+create rxr_dbd_model, FOLD0 and chain D and resi 1-65
+
+# RXR LBD
+create rxr_lbd_target, 3dzy and chain A and resi 227-458
+create rxr_lbd_model, FOLD0 and chain D and resi 162-393
+
+# RMSD Calculations
+print("\n=== RMSD Analysis for DBD and LBD of PPAR & RXR ===\n")
+
+# PPAR DBD RMSD
+rmsd_ppar_dbd = cmd.rms_cur("ppar_dbd_model", "ppar_dbd_target")
+print(f"PPAR DBD RMSD: {rmsd_ppar_dbd:.3f} A")
+
+# PPAR LBD RMSD
+rmsd_ppar_lbd = cmd.align("ppar_lbd_model", "ppar_lbd_target")
+print(f"PPAR LBD RMSD: {rmsd_ppar_lbd[0]:.3f} A")
+
+# RXR DBD RMSD
+rmsd_rxr_dbd = cmd.align("rxr_dbd_model", "rxr_dbd_target")
+print(f"RXR DBD RMSD: {rmsd_rxr_dbd[0]:.3f} A")
+
+# RXR LBD RMSD
+rmsd_rxr_lbd = cmd.align("rxr_lbd_model", "rxr_lbd_target")
+print(f"RXR LBD RMSD: {rmsd_rxr_lbd[0]:.3f} A")
+
+print("\n=== RMSD Analysis Completed Successfully! ===")
